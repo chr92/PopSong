@@ -1,0 +1,61 @@
+<head>
+  <title>PopSong</title>
+</head>
+
+<template name="main">
+  {{> loginButtons}} |
+  <a href="/">Game</a> | 
+  <a href="/leaderboard">Leaderboard</a>
+  {{> yield}}
+  <hr />
+  <p>Made by <a href="http://www.twitter.com/chendriksen">@chendriksen</a></p>
+</template>
+
+<template name="home">
+  <h2>PopSong</h2>
+  {{#if currentUser}}
+  	{{> clicker}}
+  	{{> shop}}
+  {{else}}
+  	<p> Sign in above to play </p>
+  {{/if}}
+</template>
+
+<template name="clicker">
+  <input type="button" class="code btn span4" value="Write a song!" />
+  <p>You have £{{user.money}} and make £{{user.rate}} per second.</p>
+</template>
+
+<template name="shop">
+  <h3>Buy your fame...</h3>
+  {{#each clickers}}
+  <input type="button" class="buy btn span4" id="{{cost}}" value="{{name}} (£{{cost}})">
+  {{/each}}
+  <p>Upgrades increase £ per second.</p>
+</template>
+
+<template name="upgrades">
+  {{#each items}}
+  <input type="button" class="buy btn span4" id="{{cost}}" value="Buy {{name}} (£{{cost}})">
+  {{/each}}
+ </template>
+
+<template name="player">
+	<tr class="player">
+		<td class="name">{{username}}</td>
+		<td class="money">£{{money}}</td>
+	</tr>
+</template>
+
+<template name="scores">
+	<h2>PopSong: Leaderboard</h2>
+	<table class="leaderboard table table-striped">
+		<thead>
+			<th>Name</th><th>Money</th>
+		</thead>
+
+		{{#each players}}
+			{{> player}}
+		{{/each}}
+	</table>
+</template>
