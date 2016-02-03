@@ -46,6 +46,8 @@ if (Meteor.isClient) {
     }
   });
 
+  // Upgrades to increase £ per minute
+
   Template.shop.autoClickers = function () {
     // Make this a collection
     return autoClickers;
@@ -56,6 +58,8 @@ if (Meteor.isClient) {
       Meteor.call('buy', event.target.id);
     }
   });
+
+  // Upgrades to increase £ per click
 
   Template.upgrades.items = function () {
     // Make this a collection
@@ -116,4 +120,8 @@ Meteor.methods({
     if(Meteor.user().money >= amount && amount > 0)
       Meteor.users.update({_id: this.userId}, {$inc: {'clickAdditions': (Math.floor(amount/500)), 'money': (0-amount)}});
     },
+
+  discount: function(percentage){
+
+  }
 })

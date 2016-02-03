@@ -17,6 +17,7 @@
   	{{> writeSong}}
   	{{> shop}}
     {{> upgrades}}
+    {{> celebrity}}
   {{else}}
   	<p> Sign in above to play </p>
   {{/if}}
@@ -41,6 +42,18 @@
   <input type="button" class="buy btn span4" id="{{cost}}" value="Buy a {{name}} (£{{cost}})">
   {{/each}}
   <p>Better geat increases the money you get per song.</p>
+ </template>
+
+ <template name="celebrity">
+ <h3>Friends in high places...</h3>
+ <p>Pay a fake Celebrity some real money to promote your music.</p>
+ <!--  {{#each celebrities}}
+  <input type="button" class="buy btn span4" id="{{cost}}" value="Pay {{name}} (£{{cost}})">
+  {{/each}} -->
+
+  <input type="button" class="btn btn-primary" value="Jay Y £2.50">
+
+ <p>You'll get an immediate boost of Cash!</p>
  </template>
 
 <template name="player">
