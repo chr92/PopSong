@@ -1,5 +1,5 @@
 <head>
-  <title>PopSong</title>
+  <title>Pop Star!</title>
 </head>
 
 <template name="main">
@@ -12,32 +12,35 @@
 </template>
 
 <template name="home">
-  <h2>PopSong</h2>
+  <h2>Pop Star!</h2>
   {{#if currentUser}}
   	{{> writeSong}}
   	{{> shop}}
+    {{> upgrades}}
   {{else}}
   	<p> Sign in above to play </p>
   {{/if}}
 </template>
 
 <template name="writeSong">
-  <input type="button" class="code btn span4" value="Write a song!" />
+  <input type="button" class="code btn span4" value="Write a song! (£{{user.clickAdditions}})" />
   <p>You have £{{user.money}} and make £{{user.rate}} per second.</p>
 </template>
 
 <template name="shop">
-  <h3>Buy your fame...</h3>
+  <h3>Buy some publicity...</h3>
   {{#each autoClickers}}
   <input type="button" class="buy btn span4" id="{{cost}}" value="{{name}} (£{{cost}})">
   {{/each}}
-  <p>Upgrades increase £ per second.</p>
+  <p>Publicity increases £ per second.</p>
 </template>
 
 <template name="upgrades">
+  <h3>Make better music...</h3>
   {{#each items}}
-  <input type="button" class="buy btn span4" id="{{cost}}" value="Buy {{name}} (£{{cost}})">
+  <input type="button" class="buy btn span4" id="{{cost}}" value="Buy a {{name}} (£{{cost}})">
   {{/each}}
+  <p>Better geat increases the money you get per song.</p>
  </template>
 
 <template name="player">

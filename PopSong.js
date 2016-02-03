@@ -23,10 +23,10 @@ autoClickers = [{name: "YouTube Subscriber", cost:500},
             {name: "World Tour", cost: 200000000}
         ];
 
-Items = [{name: "", cost:100},
-         {name: "", cost:500},
-         {name: "", cost: 1000},
-         {name: "", cost: 2000}
+items = [{name: "microphone", cost:1000},
+         {name: "guitar", cost:5000},
+         {name: "keyboard", cost: 10000},
+         {name: "band member", cost: 20000}
         ];
 
 if (Meteor.isClient) {
@@ -57,6 +57,17 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.upgrades.items = function () {
+    // Make this a collection
+    return items;
+  };
+
+  Template.upgrades.events({
+    'click input.buy': function (event) {
+      Meteor.call('upgrade', event.target.id);
+    }
+  });
+
   Template.scores.players = function () {
     return Meteor.users.find({}, {sort: {'money' : -1}});
   }
@@ -73,6 +84,7 @@ if (Meteor.isServer) {
     };
     user.money = 0;
     user.rate = 0;
+    user.clickAdditions = 25;
     return user;
   });
 
@@ -91,11 +103,17 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   click: function () {
-    Meteor.users.update({_id: this.userId},  {$inc: {'money' : 25}});
+    var increment = Meteor.users.findOne({_id: this.userId}).clickAdditions;
+    Meteor.users.update({_id: this.userId},  {$inc: {'money' : increment}});
   },
 
   buy: function(amount){
     if(Meteor.user().money >= amount && amount > 0)
       Meteor.users.update({_id: this.userId}, {$inc: {'rate': (Math.floor(amount/500)), 'money': (0-amount)}});
+    },
+
+  upgrade: function(amount){
+    if(Meteor.user().money >= amount && amount > 0)
+      Meteor.users.update({_id: this.userId}, {$inc: {'clickAdditions': (Math.floor(amount/500)), 'money': (0-amount)}});
     },
 })
