@@ -14,21 +14,21 @@
 <template name="home">
   <h2>PopSong</h2>
   {{#if currentUser}}
-  	{{> write_song}}
+  	{{> writeSong}}
   	{{> shop}}
   {{else}}
   	<p> Sign in above to play </p>
   {{/if}}
 </template>
 
-<template name="write_song">
+<template name="writeSong">
   <input type="button" class="code btn span4" value="Write a song!" />
   <p>You have £{{user.money}} and make £{{user.rate}} per second.</p>
 </template>
 
 <template name="shop">
   <h3>Buy your fame...</h3>
-  {{#each auto_clickers}}
+  {{#each autoClickers}}
   <input type="button" class="buy btn span4" id="{{cost}}" value="{{name}} (£{{cost}})">
   {{/each}}
   <p>Upgrades increase £ per second.</p>

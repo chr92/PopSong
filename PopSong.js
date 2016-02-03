@@ -10,7 +10,7 @@ Router.route('/', {
 });
 
 // This shouldn't be hardcoded
-auto_clickers = [{name: "YouTube Subscriber", cost:500},
+autoClickers = [{name: "YouTube Subscriber", cost:500},
             {name: "Radio Feature", cost:1000},
             {name: "Blog Interview", cost:2000},
             {name: "Magazine Cover", cost:10000},
@@ -36,19 +36,19 @@ if (Meteor.isClient) {
     passwordSignupFields: 'USERNAME_ONLY'
   });
 
-  Template.write_song.user = function () {
+  Template.writeSong.user = function () {
     return Meteor.user();
   };
 
-  Template.write_song.events({
+  Template.writeSong.events({
     'click input.code': function () {
       Meteor.call('click');
     }
   });
 
-  Template.shop.auto_clickers = function () {
+  Template.shop.autoClickers = function () {
     // Make this a collection
-    return auto_clickers;
+    return autoClickers;
   };
 
   Template.shop.events({
