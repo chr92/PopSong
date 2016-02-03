@@ -1,6 +1,8 @@
 PopSong
 -------
 
+http://popstar.meteor.com/
+
 This is a simple app like cookie clicker that I've built for testing an API. More on that later
 
 ## Todo
